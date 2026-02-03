@@ -9,6 +9,11 @@ This fork is used to compile Skia automatically for
 [laf](https://github.com/TekisasuGraphics/laf) and
 [Tekisasu Graphics](https://github.com/TekisasuGraphics/graphics) using GitHub Actions.
 
+Tekisasu is only utilizing builds for Windows and GNU/Linux.  macOS builds *should* work
+because we are not really altering anything here, but we do not use that platform
+for any reason other than game engine runtimes, and not Tekisasu Toolchain components
+such as Tekisasu Graphics, of which this project facilitates.
+
 # Building Skia
 
 In the following sections you will find straightforward steps to

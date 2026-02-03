@@ -1,21 +1,21 @@
 # Skia for Aseprite and laf
 
-**Pre-built binaries of Skia** in the [releases page](https://github.com/aseprite/skia/releases).
+**Pre-built binaries of Skia** in the [releases page](https://github.com/TekisasuGraphics/skia/releases).
 
 Skia is a 2D graphic library developed by Google Inc., you can find
 the official website in [skia.org](https://skia.org).
 
 This fork is used to compile Skia automatically for
-[laf](https://github.com/aseprite/laf) and
-[Aseprite](https://github.com/aseprite/aseprite) using GitHub Actions.
+[laf](https://github.com/TekisasuGraphics/laf) and
+[Tekisasu Graphics](https://github.com/TekisasuGraphics/graphics) using GitHub Actions.
 
 # Building Skia
 
 In the following sections you will find straightforward steps to
 compile Skia. You can always check the [official Skia
 instructions](https://skia.org/docs/user/build) and select the OS you are
-building for. [Aseprite](https://github.com/aseprite/aseprite) and
-[laf](https://github.com/aseprite/laf) use the **`aseprite-m124`** branch.
+building for. [Tekisasu Graphics](https://github.com/TekisasuGraphics/graphics) and
+[laf](https://github.com/TekisasuGraphics/laf) use the **`aseprite-m124`** branch.
 So remember to checkout that specific branch.
 
 These are the platform-specific steps to compile Skia:

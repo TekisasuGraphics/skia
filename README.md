@@ -1,4 +1,4 @@
-# Skia for Aseprite and laf
+# Skia for Tekisasu Graphics and laf
 
 **Pre-built binaries of Skia** in the [releases page](https://github.com/TekisasuGraphics/skia/releases).
 
@@ -25,7 +25,7 @@ These are the platform-specific steps to compile Skia:
 * [Skia on Linux](#skia-on-linux)
 
 After this you should have all Skia libraries compiled. After that,
-when you compile laf or Aseprite remember to add
+when you compile laf or Tekisasu Graphics remember to add
 `-DSKIA_DIR=$HOME/deps/skia` parameter to your `cmake` call and all
 other parameters.
 
@@ -56,7 +56,7 @@ Then:
 Just ignore it.)
 
     cd C:\deps
-    git clone -b aseprite-m124 https://github.com/aseprite/skia.git
+    git clone -b aseprite-m124 https://github.com/TekisasuGraphics/skia.git
     cd skia
     set GIT_EXECUTABLE=git.bat
     python3 tools/git-sync-deps
@@ -98,7 +98,7 @@ several minutes to finish:
     mkdir $HOME/deps
     cd $HOME/deps
     git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-    git clone -b aseprite-m124 https://github.com/aseprite/skia.git
+    git clone -b aseprite-m124 https://github.com/TekisasuGraphics/skia.git
     export PATH="${PWD}/depot_tools:${PATH}"
     cd skia
     python3 tools/git-sync-deps
@@ -124,7 +124,7 @@ several minutes to finish:
     mkdir $HOME/deps
     cd $HOME/deps
     git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-    git clone -b aseprite-m124 https://github.com/aseprite/skia.git
+    git clone -b aseprite-m124 https://github.com/TekisasuGraphics/skia.git
     export PATH="${PWD}/depot_tools:${PATH}"
     cd skia
     python3 tools/git-sync-deps

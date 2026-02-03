@@ -40,6 +40,8 @@ jobs:
       run: |
         git clone 'https://chromium.googlesource.com/chromium/tools/depot_tools.git'
         echo "::add-path::${PWD}/depot_tools"
+        cd depot_tools
+        gclient sync
     - name: Sync Deps
       env:
         GIT_SYNC_DEPS_SKIP_EMSDK: true

@@ -35,11 +35,12 @@ jobs:
             libfontconfig-dev libgl1-mesa-dev python3
         fi
     - name: Download depot_tools
+      shell: bash
       run: |
         git clone 'https://chromium.googlesource.com/chromium/tools/depot_tools.git'
         export PATH="${PWD}/depot_tools:${PATH}"
         cd depot_tools
-        gclient sync
+        gclient sync || true
     - name: Sync Deps
       env:
         GIT_SYNC_DEPS_SKIP_EMSDK: true

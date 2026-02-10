@@ -19,7 +19,7 @@ jobs:
         else
           sudo apt-get update -qq
           sudo apt-get install -y \
-            git g++ g++-multilib clang-12 pandoc dpkg-dev \
+            git g++ g++-multilib clang-19 pandoc dpkg-dev \
             libcurl4-openssl-dev libgif-dev libjpeg-dev \
             libz-dev libpng-dev libtinyxml-dev libpixman-1-dev \
             libx11-dev libxcursor-dev ninja-build zip unzip \
@@ -39,11 +39,11 @@ jobs:
       run: python3 tools/git-sync-deps
     - name: Fetch Ninja
       run: python3 bin/fetch-ninja
-    - name: Install LLVM and Clang 18
+    - name: Install LLVM and Clang 19
       if: runner.os == 'Windows'
       uses: KyleMayes/install-llvm-action@v2
       with:
-        version: "18.1"
+        version: "19"
     - name: Generating Ninja Files
       shell: bash
       run: |
@@ -56,14 +56,14 @@ jobs:
         fi
         if [[ "${{ runner.os }}" == "Windows" ]] ; then
           clang++ --version
-          export gn_flags='is_trivial_abi=false win_vc="C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC" win_toolchain_version="17.10" win_sdk="C:\\Program Files\\Windows Kits\\10" win_sdk_version="10.0.22621.0" cc="clang" cxx="clang++" clang_win="C:\Program Files\LLVM" clang_win_version="18.1"'
+          export gn_flags='is_trivial_abi=false win_vc="C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC" win_toolchain_version="17.10" win_sdk="C:\\Program Files\\Windows Kits\\10" win_sdk_version="10.0.22621.0" cc="clang" cxx="clang++" clang_win="C:\Program Files\LLVM" clang_win_version="19"'
           if [[ "${{ matrix.mode }}" == "Debug" ]] ; then
             export gn_flags="$gn_flags extra_cflags=[\"-MTd\"]"
           else
             export gn_flags="$gn_flags extra_cflags=[\"-MT\"]"
           fi
         else
-          export gn_flags='cc="clang-12" cxx="clang++-12"'
+          export gn_flags='cc="clang-19" cxx="clang++-19"'
         fi
         gn gen out/${{ matrix.mode }}-${{ matrix.arch }} --args="is_debug=$is_debug is_official_build=$is_official skia_use_system_expat=false skia_use_system_icu=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false skia_use_freetype=true skia_use_harfbuzz=true skia_pdf_subset_harfbuzz=true skia_use_system_freetype2=false skia_use_system_harfbuzz=false target_cpu=\"${{ matrix.arch }}\" $gn_flags"
     - name: Compiling

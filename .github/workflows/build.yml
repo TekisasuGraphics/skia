@@ -6,16 +6,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-20.04]
+        os: [windows-latest, ubuntu-20.04]
         mode: [Release, Debug]
-        arch: [x64, arm64]
-        exclude:
-          - os: macos-latest
-            arch: x86
-          - os: windows-latest
-            arch: arm64
-          - os: ubuntu-20.04
-            arch: arm64
+        arch: [x64]
     steps:
     - uses: actions/checkout@v4
     - name: Install Dependencies
@@ -23,8 +16,6 @@ jobs:
       run: |
         if [[ "${{ runner.os }}" == "Windows" ]] ; then
           choco install zip
-        elif [[ "${{ runner.os }}" == "macOS" ]] ; then
-          brew install coreutils
         else
           sudo apt-get update -qq
           sudo apt-get install -y \
@@ -38,6 +29,7 @@ jobs:
       shell: bash
       run: |
         git clone 'https://chromium.googlesource.com/chromium/tools/depot_tools.git'
+        echo "${PWD}/depot_tools" >> $GITHUB_PATH
         export PATH="${PWD}/depot_tools:${PATH}"
         cd depot_tools
         gclient sync || true
@@ -70,12 +62,6 @@ jobs:
           else
             export gn_flags="$gn_flags extra_cflags=[\"-MT\"]"
           fi
-        elif [[ "${{ runner.os }}" == "macOS" ]] ; then
-          if [[ "${{ matrix.arch }}" == arm64 ]] ; then
-            export gn_flags='extra_cflags=["-stdlib=libc++", "-mmacosx-version-min=11.0"] extra_cflags_cc=["-frtti"]'
-          else
-            export gn_flags='extra_cflags=["-stdlib=libc++", "-mmacosx-version-min=10.9"] extra_cflags_cc=["-frtti"]'
-          fi
         else
           export gn_flags='cc="clang-12" cxx="clang++-12"'
         fi
@@ -90,11 +76,7 @@ jobs:
         else
           export libext=a
         fi
-        if [[ "${{ runner.os }}" == "macOS" ]] ; then
-          export cp=gcp
-        else
-          export cp=cp
-        fi
+        export cp=cp
         export dst=Skia-${{ runner.os }}-${{ matrix.mode }}-${{ matrix.arch }}
         mkdir $dst
         $cp -R --parents \
